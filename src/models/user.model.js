@@ -32,6 +32,7 @@ const userSchema = new Schema({
 userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) return next();
     this.password = bcrypt.hash(this.password, 10)
+    next()
     //next() //problem is that it will change the password each time
     // so what we want is that this could should run ONLY if we set or change the password
 } )
@@ -53,6 +54,19 @@ userSchema.methods.generateAccessToken = async function () {
         process.env.ACCESS_TOKEN_SECRET,
         {
             expiresIn: process.env.ACCESS_TOKEN_EXPIRY
+        }
+    )
+}
+
+userSchema.methods.generateRefreshToken = function(){
+    return jwt.sign(
+        {
+            _id: this._id,
+            
+        },
+        process.env.REFRESH_TOKEN_SECRET,
+        {
+            expiresIn: process.env.REFRESH_TOKEN_EXPIRY
         }
     )
 }

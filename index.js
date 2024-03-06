@@ -1,8 +1,6 @@
 // require('dotenv').config()
 // common JS
 // const express = require('express');
-
-
 // modern syntax - module JS
 import dotenv from "dotenv"
 import express from 'express';
@@ -12,15 +10,16 @@ import connectDB from './src/db/index.js';
 import mongoose from 'mongoose';
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUI from 'swagger-ui-express';
+import {app} from './app.js';
+
 
 dotenv.config({
     path: './.env'
 })
 
-const app = express()
 //const port = 8000
 //production grade code
-const port = process.env.PORT || 8000;
+//const port = process.env.PORT || 8000;
 
 connectDB()
 .then(() => {

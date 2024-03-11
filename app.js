@@ -1,6 +1,8 @@
 import express from "express"
 import cors from "cors"
 import cookieParser from "cookie-parser"
+import bodyParser from "body-parser";
+
 
 const app = express()
 
@@ -10,9 +12,9 @@ app.use(cors({
 }))
 
 // normal JSON data
-app.use(express.json({limit: "16kb"}))
+app.use(express.json())
 // data coming from URL changes, so we want encoder for URLs too
-app.use(express.urlencoded({extended: true, limit: "16kb"}))
+app.use(express.urlencoded({extended: true}))
 // for public assests
 app.use(express.static("public"))
 // for secure keys

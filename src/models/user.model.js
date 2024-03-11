@@ -5,13 +5,13 @@ import bcrypt from 'bcrypt';
 const { Schema } = mongoose;
 const userSchema = new Schema({
 
-    username: {
+    userName: {
         type: String,
         required: true,
         unique: true,
         index: true,
     },
-    fullname: {
+    fullName: {
         type: String,
         required: true,
         index: true,

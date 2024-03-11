@@ -15,12 +15,14 @@ const registerUser = asyncHandler( async (req,res) => {
     // check for user creation
     // return response or error
 
-    const {fullName, userName, email, password} = req.body
-    console.log("email:", email);
+    const {userName, fullName, password, email } = req.body
+   
+    console.log("userName:", userName);
+    
 
-    if (fullName == "") {
-        throw new ApiError(400, "full name is required")
-    }
+    // if (fullName == "") {
+    //     throw new ApiError(400, "full name is required")
+    // }
     // or use if block with array
 
     if ([fullName, userName, email, password].some((field) => 
@@ -33,7 +35,7 @@ const registerUser = asyncHandler( async (req,res) => {
     //     message:"ok"
     // })
 
-    const existedUser = User.findOne({
+    const existedUser = await User.findOne({
         // syntax: $operator: [{},{}]
         $or: [{ userName },{ email }]
     })

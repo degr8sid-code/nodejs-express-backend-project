@@ -77,10 +77,10 @@ app.use(
 );
 
 // Importing and using the listRoute
-app.use('/api', listRoute);
+//app.use('/api', listRoute);
 
 // Importing and using the taskRoute
-app.use('/api', taskRoute);
+//app.use('/api', taskRoute);
 
 
 

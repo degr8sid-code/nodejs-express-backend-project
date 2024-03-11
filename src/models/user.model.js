@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
+const { Schema } = mongoose;
 const userSchema = new Schema({
 
     username: {
@@ -19,6 +20,10 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'Password is required']
     },
+    email: {
+        type: String,
+        required: [true, 'Email is required']
+    },
 
     refreshToken: {
         type: String
@@ -31,7 +36,7 @@ const userSchema = new Schema({
 
 userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) return next();
-    this.password = bcrypt.hash(this.password, 10)
+    this.password = await bcrypt.hash(this.password, 10)
     next()
     //next() //problem is that it will change the password each time
     // so what we want is that this could should run ONLY if we set or change the password
